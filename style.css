@@ -1,1 +1,35 @@
+body{
+  margin:0;
+  font-family: Arial;
+  background: linear-gradient(to bottom, #4facfe, #f093fb);
+  text-align:center;
+  color:white;
+}
 
+.topbar{
+  display:flex;
+  justify-content:space-around;
+  padding:15px;
+  background:rgba(0,0,0,0.5);
+}
+
+.card{
+  margin-top:80px;
+  background:rgba(0,0,0,0.6);
+  padding:30px;
+  border-radius:20px;
+  width:80%;
+  margin:auto;
+}
+
+button{
+  padding:15px 25px;
+  margin:10px;
+  border:none;
+  border-radius:15px;
+  font-size:16px;
+}
+
+.shop{
+  margin-top:40px;
+}
