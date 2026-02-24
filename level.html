@@ -1,1 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Level</title>
+<link rel="stylesheet" href="style.css">
+</head>
 
+<body>
+
+<div class="topbar">
+  <div>❤️ <span id="hearts">3</span></div>
+  <div>⭐ <span id="xp">0</span></div>
+  <div>💰 <span id="coins">0</span></div>
+  <div>⏱ <span id="timer">30</span></div>
+</div>
+
+<div class="card">
+  <h2 id="question">Translate: Apple</h2>
+  <button onclick="correct()">Яблоко</button>
+  <button onclick="wrong()">Машина</button>
+</div>
+
+<script src="script.js"></script>
+<script>
+startLevel();
+</script>
+
+</body>
+</html>
