@@ -33,3 +33,21 @@ button{
 .shop{
   margin-top:40px;
 }
+
+.map{
+  margin-top:100px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  align-items:center;
+}
+
+.level{
+  padding:20px 40px;
+  font-size:20px;
+  border-radius:20px;
+}
+
+.level:disabled{
+  background:gray;
+}
