@@ -1,53 +1,29 @@
-body{
-  margin:0;
+body {
   font-family: Arial;
-  background: linear-gradient(to bottom, #4facfe, #f093fb);
-  text-align:center;
-  color:white;
+  text-align: center;
+  background: #1e1e2f;
+  color: white;
 }
 
-.topbar{
-  display:flex;
-  justify-content:space-around;
-  padding:15px;
-  background:rgba(0,0,0,0.5);
+.screen {
+  display: none;
+  padding: 40px;
 }
 
-.card{
-  margin-top:80px;
-  background:rgba(0,0,0,0.6);
-  padding:30px;
-  border-radius:20px;
-  width:80%;
-  margin:auto;
+.active {
+  display: block;
 }
 
-button{
-  padding:15px 25px;
-  margin:10px;
-  border:none;
-  border-radius:15px;
-  font-size:16px;
+button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
 }
 
-.shop{
-  margin-top:40px;
-}
-
-.map{
-  margin-top:100px;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-  align-items:center;
-}
-
-.level{
-  padding:20px 40px;
-  font-size:20px;
-  border-radius:20px;
-}
-
-.level:disabled{
-  background:gray;
+.topbar {
+  margin-bottom: 20px;
 }
