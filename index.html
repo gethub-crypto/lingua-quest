@@ -1,27 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Lingua Quest - Map</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Lingua Quest</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<h1>🗺 Level Map</h1>
+<!-- HOME -->
+<div id="home" class="screen active">
+  <h1>Lingua Quest</h1>
+  <button onclick="showScreen('levels')">Start Learning</button>
+  <button onclick="showScreen('minigames')">Mini Games</button>
+  <button onclick="showScreen('shop')">Shop</button>
+</div>
 
-<div class="map">
+<!-- LEVELS -->
+<div id="levels" class="screen">
+  <h2>Levels</h2>
+  <button onclick="startLevel(1)">Level 1</button>
+  <button onclick="startLevel(2)">Level 2</button>
+  <button onclick="showScreen('home')">Back</button>
+</div>
 
-  <button class="level" onclick="openLevel(1)" id="level1">Level 1</button>
-  <button class="level" onclick="openLevel(2)" id="level2">Level 2</button>
-  <button class="level" onclick="openLevel(3)" id="level3">Level 3</button>
+<!-- GAME -->
+<div id="game" class="screen">
+  <div class="topbar">
+    ❤️ <span id="hearts">3</span>
+    💰 <span id="coins">0</span>
+  </div>
 
+  <h2 id="question">Question here</h2>
+
+  <div id="answers"></div>
+</div>
+
+<!-- WIN -->
+<div id="win" class="screen">
+  <h2>✅ Correct!</h2>
+  <button onclick="nextLevel()">Next</button>
+</div>
+
+<!-- LOSE -->
+<div id="lose" class="screen">
+  <h2>💔 No Hearts Left</h2>
+  <button onclick="watchAd()">Watch Ad (+1 ❤️)</button>
+  <button onclick="restartLevel()">Restart</button>
+  <button onclick="showScreen('levels')">Back to Map</button>
+</div>
+
+<!-- SHOP -->
+<div id="shop" class="screen">
+  <h2>Shop</h2>
+  <button onclick="buyHeart()">Buy Heart (50 coins)</button>
+  <button onclick="showScreen('home')">Back</button>
+</div>
+
+<!-- MINI GAMES -->
+<div id="minigames" class="screen">
+  <h2>Mini Games</h2>
+  <p>Coming soon...</p>
+  <button onclick="showScreen('home')">Back</button>
 </div>
 
 <script src="script.js"></script>
-<script>
-initMap();
-</script>
-
 </body>
 </html>
