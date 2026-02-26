@@ -250,6 +250,7 @@ function watchAd() {
 function updateUI() {
   document.getElementById("hearts").innerText = hearts;
   document.getElementById("coins").innerText = coins;
+  document.getElementById("timer").innerText = time;
 }
 
 //////////////////////////
