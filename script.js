@@ -89,30 +89,7 @@ function loadQuestion() {
 // ТАЙМЕР
 //////////////////////////
 
-function startTimer() {
-  timeLeft = 15;
-  document.getElementById("question").innerText += ` (${timeLeft}s)`;
 
-  clearInterval(timer);
-
-  timer = setInterval(() => {
-    timeLeft--;
-    document.getElementById("question").innerText =
-      questions[currentLevel].question + ` (${timeLeft}s)`;
-
-    if (timeLeft <= 0) {
-      clearInterval(timer);
-      hearts--;
-      if (hearts <= 0) {
-        showScreen("lose");
-      } else {
-        loadQuestion();
-        startTimer();
-      }
-      updateUI();
-    }
-  }, 1000);
-}
 
 //////////////////////////
 // ПРОВЕРКА ОТВЕТА
@@ -141,6 +118,33 @@ function checkAnswer(index) {
   saveGame();
   updateUI();
 }
+
+function startTimer() {
+  timeLeft = 15;
+  document.getElementById("timer").innerText = timeLeft;
+
+  clearInterval(timer);
+
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      hearts--;
+
+      if (hearts <= 0) {
+        showScreen("lose");
+      } else {
+        loadQuestion();
+        startTimer();
+      }
+
+      updateUI();
+    }
+  }, 1000);
+}
+
 
 //////////////////////////
 // УРОВЕНЬ ИГРОКА
