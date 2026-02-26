@@ -184,12 +184,20 @@ function nextLevel() {
   }
 }
 
-function restartLevel() {
+//function restartLevel() {
+//  hearts = 3;
+//  saveGame();
+//  loadQuestion();
+ // showScreen("game");
+//  startTimer();
+//}
+
+function restartGame() {
+  currentLevel = 1;
   hearts = 3;
+  showScreen("levels");
   saveGame();
-  loadQuestion();
-  showScreen("game");
-  startTimer();
+  updateUI();
 }
 
 //////////////////////////
