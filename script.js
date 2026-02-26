@@ -158,14 +158,29 @@ function checkLevelUp() {
 // ДАЛЬШЕ
 //////////////////////////
 
+///! function nextLevel() {
+ // currentLevel++;
+  //if (questions[currentLevel]) {
+   // loadQuestion();
+  //  showScreen("game");
+  //  startTimer();
+  //} else {
+   // showScreen("levels");
+  //}////
+//}
+
 function nextLevel() {
   currentLevel++;
+
   if (questions[currentLevel]) {
     loadQuestion();
     showScreen("game");
     startTimer();
   } else {
-    showScreen("levels");
+    coins += 100; // бонус за прохождение
+    saveGame();
+    updateUI();
+    showScreen("finish");
   }
 }
 
