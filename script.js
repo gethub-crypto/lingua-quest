@@ -16,8 +16,13 @@ const questions = {
     question: "Cat = ?",
     answers: ["Собака", "Кот"],
     correct: 1
+  },
+  3: {
+    question: "Dog = ?",
+    answers: ["Кот", "Собака"],
+    correct: 1
   }
-  // добавляй остальные вопросы сюда
+  // добавляй новые уровни сюда по мере необходимости
 };
 
 //////////////////////////
@@ -69,14 +74,15 @@ function stopTimer() {
 }
 
 function startTimer() {
-  stopTimer();           // гарантированно убираем старый таймер
+  stopTimer();
 
   timeLeft = 15;
-  document.getElementById("timer").innerText = timeLeft;
+  const timerEl = document.getElementById("timer");
+  if (timerEl) timerEl.innerText = timeLeft;
 
   timer = setInterval(() => {
     timeLeft--;
-    document.getElementById("timer").innerText = timeLeft;
+    if (timerEl) timerEl.innerText = timeLeft;
 
     if (timeLeft <= 0) {
       stopTimer();
@@ -88,40 +94,45 @@ function startTimer() {
         showScreen("lose");
       } else {
         loadQuestion();
-        startTimer();
       }
     }
   }, 1000);
 }
 
 //////////////////////////
-// ВОПРОСЫ
+// ВОПРОСЫ И УРОВНИ
 //////////////////////////
 
 function loadQuestion() {
   const q = questions[currentLevel];
+
+  // Если вопросов больше нет → завершение игры
   if (!q) {
-    // если вопроса нет — завершаем игру
-    coins += 100;
+    stopTimer();
+    coins += 100;           // бонус за прохождение всей игры
     saveGame();
     updateUI();
     showScreen("finish");
     return;
   }
 
-  document.getElementById("question").innerText = q.question;
-
+  const questionEl = document.getElementById("question");
   const answersDiv = document.getElementById("answers");
-  answersDiv.innerHTML = "";
 
-  q.answers.forEach((answer, index) => {
-    const btn = document.createElement("button");
-    btn.innerText = answer;
-    btn.onclick = () => checkAnswer(index);
-    answersDiv.appendChild(btn);
-  });
+  if (questionEl) questionEl.innerText = q.question;
+  if (answersDiv) {
+    answersDiv.innerHTML = "";
+
+    q.answers.forEach((answer, index) => {
+      const btn = document.createElement("button");
+      btn.innerText = answer;
+      btn.onclick = () => checkAnswer(index);
+      answersDiv.appendChild(btn);
+    });
+  }
 
   updateUI();
+  startTimer();
 }
 
 function startLevel(level) {
@@ -129,7 +140,6 @@ function startLevel(level) {
   stopTimer();
   loadQuestion();
   showScreen("game");
-  startTimer();
 }
 
 //////////////////////////
@@ -139,29 +149,30 @@ function startLevel(level) {
 function checkAnswer(index) {
   stopTimer();
 
-  const correct = questions[currentLevel].correct;
+  const correct = questions[currentLevel]?.correct;
 
   if (index === correct) {
     coins += 20;
     xp += 25;
     checkLevelUp();
-    showScreen("win");
+
+    currentLevel++;           // сразу переходим к следующему
+    loadQuestion();           // если вопросов больше нет → покажет finish
   } else {
     hearts--;
+    updateUI();
+    saveGame();
+
     if (hearts <= 0) {
       showScreen("lose");
     } else {
-      loadQuestion();
-      startTimer();
+      loadQuestion();         // повтор того же уровня
     }
   }
-
-  saveGame();
-  updateUI();
 }
 
 //////////////////////////
-// ПРОГРЕСС УРОВНЯ ИГРОКА
+// УРОВЕНЬ ИГРОКА
 //////////////////////////
 
 function checkLevelUp() {
@@ -176,25 +187,14 @@ function checkLevelUp() {
 }
 
 //////////////////////////
-// НАВИГАЦИЯ
+// НАВИГАЦИЯ И РЕСТАРТ
 //////////////////////////
-
-function nextLevel() {
-  currentLevel++;
-  stopTimer();
-  loadQuestion();
-  showScreen("game");
-  if (questions[currentLevel]) {
-    startTimer();
-  }
-}
 
 function restartLevel() {
   stopTimer();
   hearts = 3;
   loadQuestion();
   showScreen("game");
-  startTimer();
   saveGame();
   updateUI();
 }
@@ -203,8 +203,8 @@ function restartGame() {
   stopTimer();
   currentLevel = 1;
   hearts = 3;
-  xp = 0;
   coins = 0;
+  xp = 0;
   playerLevel = 1;
   showScreen("levels");
   saveGame();
@@ -227,14 +227,12 @@ function buyHeart() {
 }
 
 function watchAd() {
-  // Здесь будет реальная реклама
   alert("Реклама просмотрена! +1 сердце");
-
   hearts++;
   saveGame();
   updateUI();
   showScreen("game");
-  startTimer();
+  loadQuestion();   // возобновляем текущий вопрос
 }
 
 //////////////////////////
@@ -242,18 +240,18 @@ function watchAd() {
 //////////////////////////
 
 function updateUI() {
-  document.getElementById("hearts").innerText = hearts;
-  document.getElementById("coins").innerText = coins;
-  // если есть xp и level в интерфейсе — тоже обновляй
-  // document.getElementById("xp").innerText = xp;
-  // document.getElementById("level").innerText = playerLevel;
+  const heartsEl = document.getElementById("hearts");
+  const coinsEl  = document.getElementById("coins");
+
+  if (heartsEl) heartsEl.innerText = hearts;
+  if (coinsEl)  coinsEl.innerText  = coins;
 }
 
 //////////////////////////
-// ЗАПУСК ИГРЫ
+// ЗАПУСК
 //////////////////////////
 
 loadGame();
 
-// Если хочешь сразу начинать с экрана уровней или главного меню — раскомментируй:
+// Если нужно сразу показать экран уровней при загрузке:
 // showScreen("levels");
