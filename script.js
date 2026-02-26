@@ -204,6 +204,13 @@ function restartGame() {
   updateUI();
 }
 
+//?
+function restartLevel() {
+  hearts = 3;
+  loadQuestion();
+  showScreen("game");
+  startTimer();   // и здесь тоже
+}
 //////////////////////////
 // МАГАЗИН
 //////////////////////////
