@@ -24,6 +24,15 @@ button {
   cursor: pointer;
 }
 
+
 .topbar {
+  display: flex;
+  justify-content: space-around;
   margin-bottom: 20px;
+  font-size: 18px;
+}
+
+#timer {
+  color: orange;
+  font-weight: bold;
 }
